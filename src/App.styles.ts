@@ -5,7 +5,9 @@ export const Container = styled.div`
   font-family: 'Oswald', sans-serif;
   color: #ddd;
   min-height: 100vh;
-`
+  height: 100%;
+  width: 100%;
+  `
 
 export const Area = styled.div`
   margin: auto;

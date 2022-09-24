@@ -4,10 +4,17 @@ import { Item } from '../../types/item';
 
 type Props = {
   item: Item;
+  onRemove: (listId: number) => void;
 }
 
-export const ListItem = ({item}: Props) => {
+export const ListItem = ({item, onRemove}: Props) => {
   const [isChecked, setIsChecked] = useState(item.done);
+
+  const handleRemoveTask = () => {
+
+    onRemove(item.id);
+  }
+
   return (
     <C.Container done={isChecked}>
       <input 
@@ -15,7 +22,13 @@ export const ListItem = ({item}: Props) => {
       checked={isChecked}
       onChange={e => setIsChecked(e.target.checked)}
       />
+
       <label>{item.name}</label>
+
+      <C.Button 
+        onClick={handleRemoveTask}>
+        Excluir
+      </C.Button>
     </C.Container>
   )
 }

@@ -16,11 +16,25 @@ export const Container = styled.div(({ done }: ContainerProps) => (
   input{ 
     width: 30px;
     height: 30px;
-    margin-right: 20px;
+    margin-right: 30px;
   }
   label {
     font-size: 24px;
     text-decoration: ${done ? 'line-through' : 'initial'};
+    flex: 1;
   }
 `
 ))
+
+export const Button = styled.button`
+    display: flex;
+    padding: 5px;
+    border: none;
+    background-color: transparent;
+    color: #b00;
+    font-size: 16px;
+    transition: all 0.5s;
+    &:hover {
+      transform: scale(1.1);
+    }
+`
