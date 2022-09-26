@@ -2,17 +2,23 @@ import * as C from './styles';
 import { useState } from 'react';
 import { Item } from '../../types/item';
 
+import { FaTrash } from 'react-icons/fa'
+import { MdModeEditOutline } from 'react-icons/md'
+
 type Props = {
   item: Item;
   onRemove: (listId: number) => void;
+  onEdit: (listId: number) => void;
 }
 
-export const ListItem = ({item, onRemove}: Props) => {
+export const ListItem = ({item, onRemove, onEdit}: Props) => {
   const [isChecked, setIsChecked] = useState(item.done);
 
-  const handleRemoveTask = () => {
-
+  const BtnRemoveTask = () => {
     onRemove(item.id);
+  }
+  const BtnEditTask = () => {
+    onEdit(item.id);
   }
 
   return (
@@ -26,8 +32,12 @@ export const ListItem = ({item, onRemove}: Props) => {
       <label>{item.name}</label>
 
       <C.Button 
-        onClick={handleRemoveTask}>
-        Excluir
+        onClick={BtnRemoveTask}>
+        <FaTrash />
+      </C.Button>
+      <C.Button 
+        onClick={BtnEditTask}>
+        <MdModeEditOutline />
       </C.Button>
     </C.Container>
   )

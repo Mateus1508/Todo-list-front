@@ -16,8 +16,12 @@ const App = () => {
       done: false
     })
     setList(newList);
+
   }
   const handleRemoveTask = (listId: number) => {
+      setList(list.filter(item => item.id !== listId))
+    }
+  const handleEditTask = (listId: number) => {
       setList(list.filter(item => item.id !== listId))
     }
 
@@ -29,7 +33,7 @@ const App = () => {
           <AddArea onEnter={handleAddTask}/>
 
         {list.map((item, index) => (
-          <ListItem key={index} item={item} onRemove={handleRemoveTask}/>
+          <ListItem key={index} item={item} onRemove={handleRemoveTask} onEdit={handleEditTask}/>
         ))}
       </C.Area>
     </C.Container>

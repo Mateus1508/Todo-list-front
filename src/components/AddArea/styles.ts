@@ -10,25 +10,27 @@ export const Container = styled.div`
   background-color: #333;
   
   button {
-    margin-right: 10px;
-    color: #fff;
-    background-color: transparent;
+    display: flex;
+    padding: 5px;
     border: none;
+    background: transparent;
+    color: #ffff;
     font-size: 32px;
     cursor: pointer;
     transition: all 0.6s;
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.2);
     }
   }
   input {
-    border-radius: 5px;
     border: none;
+    margin-left: 5px;
+    border-left: 1px solid #6666;
     outline: 0;
-    padding: 5px;
+    padding: 5px 10px;
     background: transparent;
     font-size: 24px;
-    color: #ddd;
+    color: #DDDD;
     flex: 1;
   }
 `

@@ -1,6 +1,9 @@
 import { useState, KeyboardEvent } from 'react';
 import * as C from './styles'
 
+import { MdOutlinePlaylistAdd } from 'react-icons/md'
+
+
 type Props = {
   onEnter: (taskName: string) => void;
 }
@@ -22,7 +25,7 @@ export const AddArea = ({onEnter}: Props) => {
   }
   return ( 
     <C.Container>
-      <button onClick={handleBtnPress}>+</button>
+      <button onClick={handleBtnPress}> <MdOutlinePlaylistAdd /> </button>
 
       <input 
       type="text" 
