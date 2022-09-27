@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import * as C from './App.styles';
 import { Item } from './types/item'
 import { ListItem } from './components/ListItem'
@@ -15,11 +15,24 @@ const App = () => {
       name: taskName,
       done: false
     })
-    setList(newList);
+
+    localStorage.setItem('list', JSON.stringify(newList))
+    setList(newList)
   }
   const handleRemoveTask = (listId: number) => {
-      setList(list.filter(item => item.id !== listId))
+    localStorage.setItem('list', JSON.stringify(list));
+    setList(list.filter(item => item.id !== listId));
+  }
+
+   useEffect(() => {
+    const list = localStorage.getItem('list')
+    
+    if (typeof list === 'string'){
+      if(list){
+        setList(JSON.parse(list))
+      }
     }
+    },[])
 
   return (
     <C.Container>
