@@ -8,17 +8,13 @@ import { MdModeEditOutline } from 'react-icons/md'
 type Props = {
   item: Item;
   onRemove: (listId: number) => void;
-  onEdit: (listId: number) => void;
 }
 
-export const ListItem = ({item, onRemove, onEdit}: Props) => {
+export const ListItem = ({item, onRemove}: Props) => {
   const [isChecked, setIsChecked] = useState(item.done);
 
   const BtnRemoveTask = () => {
     onRemove(item.id);
-  }
-  const BtnEditTask = () => {
-    onEdit(item.id);
   }
 
   return (
@@ -35,10 +31,7 @@ export const ListItem = ({item, onRemove, onEdit}: Props) => {
         onClick={BtnRemoveTask}>
         <FaTrash />
       </C.Button>
-      <C.Button 
-        onClick={BtnEditTask}>
-        <MdModeEditOutline />
-      </C.Button>
+          
     </C.Container>
   )
 }

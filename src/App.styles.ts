@@ -6,7 +6,8 @@ export const Container = styled.div`
   color: #ddd;
   min-height: 100vh;
   height: 100%;
-  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
   `
 
 export const Area = styled.div`

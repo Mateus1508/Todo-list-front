@@ -22,6 +22,10 @@ export const Container = styled.div(({ done }: ContainerProps) => (
     font-size: 24px;
     text-decoration: ${done ? 'line-through' : 'initial'};
     flex: 1;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    display: flex;
+    flex-wrap: wrap;
   }
 `
 ))
@@ -30,6 +34,7 @@ export const Button = styled.button`
     display: flex;
     padding: 5px;
     border: none;
+    margin: 0 10px;
     font-weight: bold;
     background-color: transparent;
     color: #b00;

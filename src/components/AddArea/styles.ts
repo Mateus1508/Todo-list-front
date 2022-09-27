@@ -32,5 +32,8 @@ export const Container = styled.div`
     font-size: 24px;
     color: #DDDD;
     flex: 1;
+    @media (max-width: 400px) {
+      max-width: 80%;
+    }
   }
 `
