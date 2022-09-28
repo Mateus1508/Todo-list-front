@@ -1,9 +1,12 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect } from 'react';
+import {v4 as uuidv4} from 'uuid';
+
 import * as C from './App.styles';
 import { Item } from './types/item'
 import { ListItem } from './components/ListItem'
 import { AddArea } from './components/AddArea'
 import GlobalStyle from './globalStyles';
+
 
 const App = () => {
   const [list, setList] = useState<Item[]>([])
@@ -11,7 +14,7 @@ const App = () => {
   const handleAddTask = (taskName: string) => {
     let newList = [...list];
     newList.push({
-      id: list.length + 1,
+      id: uuidv4(),
       name: taskName,
       done: false
     })
@@ -19,13 +22,22 @@ const App = () => {
     localStorage.setItem('list', JSON.stringify(newList))
     setList(newList)
   }
-  const handleRemoveTask = (listId: number) => {
-    localStorage.setItem('list', JSON.stringify(list));
-    setList(list.filter(item => item.id !== listId));
+  const handleRemoveTask = (listId: string) => {
+    let removeItem = list.filter(item => item.id !== listId);
+    setList(removeItem);
+    localStorage.setItem('list', JSON.stringify(removeItem));
   }
+
+  const doneTask = (isDone: boolean, listId: string) => {
+    const updateDone = prev => prev.map(item => (item.id === listId ? item.done = isDone : item))  
+    setList(updateDone);
+
+    }
+  
 
    useEffect(() => {
     const list = localStorage.getItem('list')
+
     
     if (typeof list === 'string'){
       if(list){
@@ -42,7 +54,7 @@ const App = () => {
           <AddArea onEnter={handleAddTask}/>
 
         {list.map((item, index) => (
-          <ListItem key={index} item={item} onRemove={handleRemoveTask}/>
+          <ListItem key={index} item={item} onDone={doneTask} onRemove={handleRemoveTask}/>
         ))}
       </C.Area>
     </C.Container>

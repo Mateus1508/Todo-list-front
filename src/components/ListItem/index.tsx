@@ -3,16 +3,18 @@ import { useState } from 'react';
 import { Item } from '../../types/item';
 
 import { FaTrash } from 'react-icons/fa'
-import { MdModeEditOutline } from 'react-icons/md'
 
 type Props = {
   item: Item;
-  onRemove: (listId: number) => void;
+  onRemove: (listId: string) => void;
+  onDone: (isDone: boolean) => void;
 }
 
-export const ListItem = ({item, onRemove}: Props) => {
+export const ListItem = ({item, onRemove, onDone}: Props) => {
   const [isChecked, setIsChecked] = useState(item.done);
-
+  const BtnDoneTask = () => {
+    onDone(isChecked) 
+  }
   const BtnRemoveTask = () => {
     onRemove(item.id);
   }
@@ -23,6 +25,7 @@ export const ListItem = ({item, onRemove}: Props) => {
       type="checkbox" 
       checked={isChecked}
       onChange={e => setIsChecked(e.target.checked)}
+      onClick={BtnDoneTask}
       />
 
       <label>{item.name}</label>
