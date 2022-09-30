@@ -1,5 +1,5 @@
 import * as C from './styles';
-import { useState } from 'react';
+import { useState, SetStateAction } from 'react';
 import { Item } from '../../types/item';
 
 import { FaTrash } from 'react-icons/fa'
@@ -7,15 +7,19 @@ import { FaTrash } from 'react-icons/fa'
 type Props = {
   item: Item;
   onRemove: (listId: string) => void;
-  onDone: (isDone: boolean) => void;
+  onDone: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export const ListItem = ({item, onRemove, onDone}: Props) => {
   const [isChecked, setIsChecked] = useState(item.done);
-  const BtnDoneTask = () => {
-    onDone(isChecked) 
+
+  const btnChangeCheck = () => {
+    setIsChecked(item.done === false ? item.done = true : item.done = false )
+    onDone(isChecked);
   }
+
   const BtnRemoveTask = () => {
+    setIsChecked(item.done = false)
     onRemove(item.id);
   }
 
@@ -24,8 +28,8 @@ export const ListItem = ({item, onRemove, onDone}: Props) => {
       <input 
       type="checkbox" 
       checked={isChecked}
+      onClick={btnChangeCheck}
       onChange={e => setIsChecked(e.target.checked)}
-      onClick={BtnDoneTask}
       />
 
       <label>{item.name}</label>

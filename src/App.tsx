@@ -28,17 +28,14 @@ const App = () => {
     localStorage.setItem('list', JSON.stringify(removeItem));
   }
 
-  const doneTask = (isDone: boolean, listId: string) => {
-    const updateDone = prev => prev.map(item => (item.id === listId ? item.done = isDone : item))  
-    setList(updateDone);
-
-    }
-  
+  const handleSetCheck = () => {
+    let doneCheck = [...list];
+    localStorage.setItem('list', JSON.stringify(doneCheck));
+  }
 
    useEffect(() => {
     const list = localStorage.getItem('list')
 
-    
     if (typeof list === 'string'){
       if(list){
         setList(JSON.parse(list))
@@ -54,7 +51,7 @@ const App = () => {
           <AddArea onEnter={handleAddTask}/>
 
         {list.map((item, index) => (
-          <ListItem key={index} item={item} onDone={doneTask} onRemove={handleRemoveTask}/>
+          <ListItem key={index} item={item} onDone={handleSetCheck} onRemove={handleRemoveTask}/>
         ))}
       </C.Area>
     </C.Container>
